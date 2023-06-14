@@ -1,18 +1,17 @@
-import React, {ReactElement, useContext, useEffect, useState} from "react";
+import React, {type ReactElement, useContext, useState} from "react";
 import {PageState, PageStateContext} from "../App";
-import {Button} from "@mui/material";
-import {MapContainer, SVGOverlay, TileLayer} from "react-leaflet";
-import {LatLngBoundsLiteral, LatLngLiteral} from "leaflet";
+import {Button, IconButton, InputAdornment, OutlinedInput, Paper} from "@mui/material";
+import { Search } from "@mui/icons-material";
 
 const Welcome = (): ReactElement => {
     const {setState} = useContext(PageStateContext);
     const [searchTerm, setSearchTerm] = useState("");
 
-    const handleInputChange = (event: { target: { value: React.SetStateAction<string>; }; }) => {
+    const handleInputChange = (event: any):void => {
         setSearchTerm(event.target.value);
     };
 
-    const handleSearch = () => {
+    const handleSearch = ():void => {
         // Hier kannst du die Logik für die Suchfunktion implementieren
         // Verwende die Variable searchTerm für die Suchabfrage
         console.log("Search term:", searchTerm);
@@ -20,28 +19,29 @@ const Welcome = (): ReactElement => {
     };
 
     return (
-
         <>
-
-            {/*Header*/}
             <div className="headerLandingPage">
                 <img id="logo" src="logoTravelInsights.png"/>
             </div>
             <div className="blurFilter">
-                <div className="searchBar">
-
-                    <input type="text" value={searchTerm} onChange={handleInputChange}
-                           placeholder="Wohin geht es als nächstes?"/>
-                    <Button onClick={handleSearch}>Search</Button>
-                </div>
+                    <Paper sx={{
+                        position: 'absolute', left: '50%', top: '30%',
+                        transform: 'translate(-50%, -50%)'
+                    }}>
+                    <OutlinedInput value={searchTerm} onChange={handleInputChange}
+                           placeholder="Wohin geht es als nächstes?" endAdornment={
+                            <InputAdornment position="end">
+                                <IconButton onClick={handleSearch}>
+                                    <Search />
+                                </IconButton>
+                            </InputAdornment>}/>
+                    </Paper>
             </div>
 
-            {/*Mitte*/}
             <div className="worldBackground"></div>
-            
-            {/*Footer*/}
+
             <footer className="footerLandingPage">
-                <Button onClick={() => setState(PageState.MAP)}>to Map</Button>
+                <Button variant={"contained"} onClick={() => {setState(PageState.MAP)}}>to Map</Button>
             </footer>
         </>
     );

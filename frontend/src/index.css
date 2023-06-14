@@ -47,19 +47,6 @@ code {
     margin: 25vh auto;
 }
 
-.searchBar input {
-    width: 25rem;
-    height: 3rem;
-    border: 1px solid black;
-    border-radius: 10px 10px 10px;
-    font-size: 1.5rem;
-}
-
-.searchBar button {
-    width: 2rem;
-    height: 2rem;
-}
-
 .worldBackground{
 width: 100%;
 height: 70vh;
